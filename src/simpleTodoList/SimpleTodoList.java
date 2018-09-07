@@ -1,16 +1,21 @@
 package simpleTodoList;
 
+import org.hibernate.Session;
+
 public class SimpleTodoList {
 
 	public static void main(String[] args) {
-		ToDoList list = new ToDoList();
-		UserPrompt.welcome();
-		UserPrompt.listToDos(list);
+//		ToDoList list = new ToDoList();
+//		UserPrompt.welcome();
+//		UserPrompt.listToDos(list);
+//		
+//		UserInteraction ui = new UserInteraction(list);
+//		ui.interaction();
+//		
+//		System.out.println("goodbye");
 		
-		UserInteraction ui = new UserInteraction(list);
-		ui.interaction();
-		
-		System.out.println("goodbye");
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+		session.close();
 		
 		// Welcome user
 		// Show todo list
@@ -22,21 +27,6 @@ public class SimpleTodoList {
 		// 5. quit application ('quit')
 		// 6. see the list of actions ('help')
 		
-		
-//		list.add("this is a test");
-//		list.add("this is another test");
-//		list.add("this is a final test");
-//		
-//		list.complete(1);
-//		
-//		list.listTodos();
-//		list.listCompleted();
-		
-//		UserPrompt.instructions();
-//		
-
-//		
-//		System.out.println("See ya later");
-	}
+			}
 
 }
