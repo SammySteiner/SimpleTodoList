@@ -13,9 +13,13 @@ public class SimpleTodoList {
 //		ui.interaction();
 //		
 //		System.out.println("goodbye");
-		
+		System.out.println("app start");
+	
 		Session session = HibernateUtilities.getSessionFactory().openSession();
 		session.close();
+		
+		System.out.println("app stop");
+		
 		
 		// Welcome user
 		// Show todo list

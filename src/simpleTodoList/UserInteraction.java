@@ -1,6 +1,5 @@
 package simpleTodoList;
 
-import java.io.*;
 import java.util.Scanner;
 
 public class UserInteraction {
