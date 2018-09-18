@@ -3,33 +3,70 @@ package simpleTodoList;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+
 public class ToDo {
-	String description;
-	LocalDateTime created, completed;
+	private int id;
+	private String description;
+	private LocalDateTime created, completed;
 	
 	// initialize with description
+	public ToDo() {
+	}
+	
 	public ToDo(String desc) {
-		description = desc;
+		setDescription(desc);
 		LocalDateTime createdAt = LocalDateTime.now();
-		created = createdAt;
+		setCreated(createdAt);
 	}
 	
 	// complete
 	public void complete() {
 		LocalDateTime completedAt = LocalDateTime.now();
-		completed = completedAt;
+		setCompleted(completedAt);
 	}
 	
     // check if complete
 	private String done() {
-		return completed == null ? "not complete" : "complete";
+		return getCompleted() == null ? "not complete" : "complete";
 	}
 	
 	// print
 	public String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMMM, d, YYYY");
-		String createdAt = created.format(formatter);
-		return description + " created on " + createdAt + " is " + this.done() + ".";
+		String createdAt = getCreated().format(formatter);
+		return getDescription() + " created on " + createdAt + " is " + this.done() + ".";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public LocalDateTime getCreated() {
+		return created;
+	}
+
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
+
+	public LocalDateTime getCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(LocalDateTime completed) {
+		this.completed = completed;
 	}
 	
 }

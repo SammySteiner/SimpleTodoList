@@ -13,12 +13,23 @@ public class SimpleTodoList {
 //		ui.interaction();
 //		
 //		System.out.println("goodbye");
-		System.out.println("app start");
 	
 		Session session = HibernateUtilities.getSessionFactory().openSession();
+		
+//		session.beginTransaction();
+//		ToDo todo = new ToDo("Commit something to a database.");
+//		session.save(todo);
+//		session.getTransaction().commit();
+		
+		session.beginTransaction();
+		ToDo loadedToDo = (ToDo) session.get(ToDo.class, 1);
+		System.out.println(loadedToDo.toString());
+		loadedToDo.complete();
+		System.out.println(loadedToDo.toString());
+		session.getTransaction().commit();
+		
 		session.close();
 		
-		System.out.println("app stop");
 		
 		
 		// Welcome user

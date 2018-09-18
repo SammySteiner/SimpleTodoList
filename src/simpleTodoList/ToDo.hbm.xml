@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2018, 10:06:16 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="simpleTodoList.ToDo" table="TODOS">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="created" type="java.time.LocalDateTime">
+            <column name="CREATED" />
+        </property>
+        <property name="completed" type="java.time.LocalDateTime">
+            <column name="COMPLETED" />
+        </property>
+    </class>
+</hibernate-mapping>
