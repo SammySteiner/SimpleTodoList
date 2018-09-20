@@ -8,13 +8,17 @@ public class UserPrompt {
 		System.out.println(welcomeMessage);
 	}
 	
-	public static void listToDos( ToDoList list) {
-		if (list.isEmpty()) {
+	public static void listToDos( InProgressList progress, CompletedList completed) {
+		if (progress.isEmpty() && completed.isEmpty()) {
 			System.out.println("There are no items in your todo list.");
 			simpleInstructions();
 		} else {
-			list.listTodos();
-			list.listCompleted();
+			if (!progress.isEmpty()) {
+				progress.listItems();
+			}
+			if (!completed.isEmpty()) {
+				completed.listItems();
+			}
 			simpleInstructions();
 		}
 	}

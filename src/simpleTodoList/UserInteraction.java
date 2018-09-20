@@ -3,11 +3,15 @@ package simpleTodoList;
 import java.util.Scanner;
 
 public class UserInteraction {
-	ToDoList todos;
+	InProgressList progress;
+	CompletedList completed;
 	Scanner sc = new Scanner(System.in);
 	
-	public UserInteraction(ToDoList list) {
-		todos = list;
+	public UserInteraction() {}
+	
+	public UserInteraction(InProgressList progress, CompletedList completed) {
+		this.progress = progress;
+		this.completed = completed;
 	}
 		
 	public void interaction() {
@@ -17,23 +21,24 @@ public class UserInteraction {
 			case "new":
 				System.out.println("What would you like to add to your list?");
 				String addToDo = sc.nextLine();
-				todos.add(addToDo);
-				todos.listTodos();
-				todos.listCompleted();
+				progress.createAndAdd(addToDo);
+				progress.listItems();
+				completed.listItems();
 				break;
 			case "complete":
 				System.out.println("What number item would you like to remove from your list?");
-				todos.listTodos();
+				progress.listItems();
 				int removeToDo = sc.nextInt();
-				todos.complete(removeToDo);
-				todos.listTodos();
-				todos.listCompleted();
+				ToDo toDoToRemove = progress.find(removeToDo);
+				progress.complete(toDoToRemove, completed);
+				progress.listItems();
+				completed.listItems();
 				break;
 			case "completed":
-				todos.listCompleted();
+				completed.listItems();
 				break;
 			case "todos":
-				todos.listTodos();
+				progress.listItems();
 				break;
 			case "help":
 				UserPrompt.instructions();
