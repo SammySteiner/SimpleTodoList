@@ -6,8 +6,6 @@ public class SimpleTodoList {
 
 	public static void main(String[] args) {
 		
-		InProgressList progress = new InProgressList();
-		CompletedList completed = new CompletedList();
 		
 		// Welcome user
 		// Show todo list
@@ -18,20 +16,37 @@ public class SimpleTodoList {
 		// 4. see list again ('todos')
 		// 5. quit application ('quit')
 		// 6. see the list of actions ('help')
+//		
+//		ToDoList progress = new ToDoList("In Progress");
+//		ToDoList completed = new ToDoList("Completed");
+//		
+//		UserPrompt.welcome();
+//		UserPrompt.listToDos(progress, completed);
+//		UserInteraction ui = new UserInteraction(progress, completed);
+//		ui.interaction();
+//		System.out.println("goodbye");
+		
+	
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+	
+		session.beginTransaction();
+		
+		ToDoList progress = new ToDoList("In Progress");
+		ToDoList completed = new ToDoList("Completed");
+		session.save(progress);
+		session.save(completed);
+		session.getTransaction().commit();
 		
 		UserPrompt.welcome();
 		UserPrompt.listToDos(progress, completed);
-		UserInteraction ui = new UserInteraction(progress, completed);
+		UserInteraction ui = new UserInteraction(progress, completed, session);
 		ui.interaction();
-		System.out.println("goodbye");
 		
-	
-//		Session session = HibernateUtilities.getSessionFactory().openSession();
-//		
-//		session.beginTransaction();
-//		ToDo todo = new ToDo("Commit something to a database.");
-//		session.save(todo);
-//		session.getTransaction().commit();
+		session.beginTransaction();
+		session.save(progress);
+		session.save(completed);
+		session.getTransaction().commit();
+
 //		
 //		session.beginTransaction();
 //		ToDo loadedToDo = (ToDo) session.get(ToDo.class, 1);
@@ -40,7 +55,8 @@ public class SimpleTodoList {
 //		System.out.println(loadedToDo.toString());
 //		session.getTransaction().commit();
 //		
-//		session.close();
+		session.close();
+		System.out.println("goodbye");
 		
 		
 		

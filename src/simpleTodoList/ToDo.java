@@ -8,6 +8,7 @@ public class ToDo {
 	private int id;
 	private String description;
 	private LocalDateTime created, completed;
+	private ToDoList todolist;
 	
 	// initialize with description
 	public ToDo() {
@@ -67,6 +68,14 @@ public class ToDo {
 
 	public void setCompleted(LocalDateTime completed) {
 		this.completed = completed;
+	}
+
+	public ToDoList getTodolist() {
+		return todolist;
+	}
+
+	public void setTodolist(ToDoList todolist) {
+		this.todolist = todolist;
 	}
 	
 }

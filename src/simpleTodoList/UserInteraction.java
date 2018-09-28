@@ -2,16 +2,20 @@ package simpleTodoList;
 
 import java.util.Scanner;
 
+import org.hibernate.Session;
+
 public class UserInteraction {
-	InProgressList progress;
-	CompletedList completed;
+	ToDoList progress;
+	ToDoList completed;
+	Session session;
 	Scanner sc = new Scanner(System.in);
 	
 	public UserInteraction() {}
 	
-	public UserInteraction(InProgressList progress, CompletedList completed) {
+	public UserInteraction(ToDoList progress, ToDoList completed, Session session) {
 		this.progress = progress;
 		this.completed = completed;
+		this.session = session;
 	}
 		
 	public void interaction() {
@@ -21,7 +25,10 @@ public class UserInteraction {
 			case "new":
 				System.out.println("What would you like to add to your list?");
 				String addToDo = sc.nextLine();
-				progress.createAndAdd(addToDo);
+				session.beginTransaction();
+				progress.createItemAndAdd(addToDo);
+				session.save(progress);
+				session.getTransaction().commit();
 				progress.listItems();
 				completed.listItems();
 				break;
@@ -30,7 +37,11 @@ public class UserInteraction {
 				progress.listItems();
 				int removeToDo = sc.nextInt();
 				ToDo toDoToRemove = progress.find(removeToDo);
-				progress.complete(toDoToRemove, completed);
+				session.beginTransaction();
+				progress.transfer(toDoToRemove, completed);
+				session.save(progress);
+				session.save(completed);
+				session.getTransaction().commit();
 				progress.listItems();
 				completed.listItems();
 				break;

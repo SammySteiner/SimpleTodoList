@@ -8,7 +8,7 @@ public class UserPrompt {
 		System.out.println(welcomeMessage);
 	}
 	
-	public static void listToDos( InProgressList progress, CompletedList completed) {
+	public static void listToDos( ToDoList progress, ToDoList completed) {
 		if (progress.isEmpty() && completed.isEmpty()) {
 			System.out.println("There are no items in your todo list.");
 			simpleInstructions();

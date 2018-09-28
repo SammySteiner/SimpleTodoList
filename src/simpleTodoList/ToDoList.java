@@ -1,37 +1,84 @@
  package simpleTodoList;
 
 import java.util.LinkedList;
+import java.util.List;
 
-public abstract class ToDoList {
+public class ToDoList {
 	
-	LinkedList<ToDo> list = new LinkedList<ToDo>();
+	private int id;
+	private String name;
+	private List<ToDo> todos = new LinkedList<ToDo>();
 	
+	
+
 	public ToDoList() {}
 	
-	public void add(ToDo item) {}
+	public ToDoList(String name) {
+		this.name = name;
+	}
+	
+	public void add(ToDo item) {
+		item.setTodolist(this);
+		todos.add(item);
+		System.out.println(item.toString() + " Item successfully added to " + name + " list.");
+	}
+	
+	public void createItemAndAdd(String desc) {
+		ToDo item = new ToDo(desc);
+		this.add(item);
+	}
 	
 	public ToDo find(int num){
-		ToDo item = list.get(num - 1);
+		ToDo item = todos.get(num - 1);
 		return item;
 	}
 	
-	public void complete(ToDo item, CompletedList completed) {
+	public void transfer(ToDo item, ToDoList nextList) {
 		item.complete();
-		System.out.println(item.toString() + " Item successfully completed and removed from todo list.");
+		todos.remove(item);
+		item.setTodolist(nextList);
+		nextList.add(item);
+		System.out.println(item.toString() + " Item successfully transfered from " + name + " to " + nextList.getName() + " list.");
 	}
 	
 	public void listItems() {
 		int counter = 0;
-		for( ToDo item : list ) {
+		System.out.println("Your " + name + " List:");
+		for( ToDo item : todos ) {
 			counter++;
 			System.out.println(counter + ". " + item.toString());
 		}
 	}
 	
 	public boolean isEmpty() {
-		return list.isEmpty();
+		return todos.isEmpty();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<ToDo> getTodos() {
+		return todos;
+	}
+
+	public void setTodos(List<ToDo> todos) {
+		this.todos = todos;
+	}
+
+
 	
 
 }

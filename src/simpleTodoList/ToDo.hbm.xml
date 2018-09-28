@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 18, 2018, 10:06:16 AM by Hibernate Tools 3.5.0.Final -->
+<!-- Generated Sep 20, 2018, 10:43:13 PM by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="simpleTodoList.ToDo" table="TODOS">
+    <class name="simpleTodoList.ToDo" table="TODO">
         <id name="id" type="int">
             <column name="ID" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
@@ -17,5 +17,8 @@
         <property name="completed" type="java.time.LocalDateTime">
             <column name="COMPLETED" />
         </property>
+        <many-to-one name="todolist" class="simpleTodoList.ToDoList" not-null="true">
+            <column name="TODOLIST" />
+        </many-to-one>
     </class>
 </hibernate-mapping>
