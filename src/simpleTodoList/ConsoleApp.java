@@ -2,8 +2,10 @@ package simpleTodoList;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 public class ConsoleApp {
 	
@@ -22,6 +24,11 @@ public class ConsoleApp {
 		// 6. see the list of actions ('help')
 		
 		session.beginTransaction();
+		
+//		Criteria criteria = session.createCriteria(ToDoList.class)
+//				.add(Restrictions.eqOrIsNull("name", "Completed"));
+//		
+//		System.out.println(((ToDoList) criteria.list().get(0)).getTodos());
 		
 		Query query = session.createQuery("from ToDoList"); 
 				
